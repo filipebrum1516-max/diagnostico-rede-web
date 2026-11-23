@@ -1,0 +1,16 @@
+{
+  "name": "diagnostico-rede-web",
+  "version": "1.0.0",
+  "description": "Versão web do Diagnóstico de Rede: testes de conexão feitos direto no navegador.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json && node scripts/copiar-arquivos.mjs",
+    "dev": "npm run build && node scripts/servidor.mjs",
+    "test": "tsc -p tsconfig.test.json && node --test"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0"
+  },
+  "license": "MIT"
+}

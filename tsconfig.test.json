@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": ".build-testes"
+  },
+  "include": ["src/tipos.ts", "src/metricas.ts", "src/analise.ts", "src/relatorio.ts"]
+}
