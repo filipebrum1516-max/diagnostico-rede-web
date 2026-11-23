@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diagnóstico de Rede · Teste de conexão para suporte técnico</title>
+    <meta
+      name="description"
+      content="Teste de conexão no navegador: latência, jitter, perda, DNS, download e upload, com diagnóstico da causa provável e relatório para chamados de suporte."
+    />
+    <meta name="theme-color" content="#0a4fd6" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="assets/main.js"></script>
+  </head>
+  <body>
+    <div class="fundo" aria-hidden="true"><i></i><i></i><i></i></div>
+
+    <header class="barra vidro">
+      <a class="marca" href="./">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <rect width="32" height="32" rx="9" fill="var(--azul)" />
+          <path d="M8 13.5a11.5 11.5 0 0 1 16 0M11 17a7 7 0 0 1 10 0M14 20.5a2.8 2.8 0 0 1 4 0" />
+          <circle cx="16" cy="23.6" r="1.6" fill="#fff" />
+        </svg>
+        <span>Diagnóstico de Rede</span>
+      </a>
+      <nav>
+        <a href="https://github.com/filipebrum1516-max/diagnostico-rede-web" target="_blank" rel="noopener">Código</a>
+        <a href="https://github.com/filipebrum1516-max/diagnostico-rede" target="_blank" rel="noopener">Versão Python</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-texto">
+          <span class="chip">Ferramenta de suporte técnico</span>
+          <h1>Diagnóstico de conexão em menos de um minuto.</h1>
+          <p>
+            Mede latência, estabilidade, DNS e velocidade direto no navegador, aponta a causa provável
+            do problema e gera um relatório pronto para o chamado.
+          </p>
+        </div>
+
+        <form id="form" class="painel vidro" autocomplete="off">
+          <label>
+            <span>Plano contratado</span>
+            <div class="campo-unidade">
+              <input id="plano" type="number" min="1" max="10000" inputmode="numeric" placeholder="300" />
+              <em>Mbps</em>
+            </div>
+          </label>
+          <label>
+            <span>Cliente ou protocolo <i>(opcional)</i></span>
+            <input id="cliente" type="text" maxlength="60" placeholder="Ex.: 10482" />
+          </label>
+          <button id="iniciar" type="submit" class="botao-principal">Iniciar diagnóstico</button>
+          <button id="exemplo" type="button" class="botao-secundario">Ver um exemplo</button>
+
+          <ol class="etapas">
+            <li data-etapa="conexao" data-estado="aguardando"><i></i><span>Conexão e provedor</span><b class="etapa-valor"></b></li>
+            <li data-etapa="latencia" data-estado="aguardando"><i></i><span>Latência e estabilidade</span><b class="etapa-valor"></b></li>
+            <li data-etapa="dns" data-estado="aguardando"><i></i><span>Resolução DNS</span><b class="etapa-valor"></b></li>
+            <li data-etapa="download" data-estado="aguardando"><i></i><span>Download</span><b class="etapa-valor"></b></li>
+            <li data-etapa="upload" data-estado="aguardando"><i></i><span>Upload</span><b class="etapa-valor"></b></li>
+          </ol>
+        </form>
+      </section>
+
+      <section id="resultado" class="resultado" hidden>
+        <div id="status" class="status vidro" data-nivel="OK">
+          <span id="status-icone" class="status-icone"></span>
+          <div>
+            <h2 id="status-titulo"></h2>
+            <p id="status-sub"></p>
+          </div>
+        </div>
+
+        <div id="metricas" class="metricas"></div>
+
+        <div class="grade-dupla">
+          <article class="painel vidro">
+            <header class="painel-topo">
+              <h3>Latência por medição</h3>
+              <span class="legenda-unidade">ms</span>
+            </header>
+            <div id="grafico-latencia" class="grafico"></div>
+            <div id="conexao-info" class="conexao-info"></div>
+          </article>
+
+          <article class="painel vidro">
+            <header class="painel-topo"><h3>Diagnóstico e próximos passos</h3></header>
+            <ul id="achados" class="achados"></ul>
+          </article>
+        </div>
+
+        <div class="acoes-relatorio vidro">
+          <span>Relatório para o chamado</span>
+          <div>
+            <button id="copiar" type="button" class="botao-secundario">Copiar relatório</button>
+            <button id="baixar-txt" type="button" class="botao-secundario">Baixar .txt</button>
+            <button id="baixar-json" type="button" class="botao-secundario">Baixar .json</button>
+          </div>
+        </div>
+      </section>
+
+      <footer class="rodape">
+        <p>
+          O navegador não permite ping (ICMP), traceroute nem acesso ao roteador. Por isso, esta versão mede a
+          latência por HTTP, consulta o DNS via DNS-over-HTTPS e mede a velocidade com os servidores da Cloudflare.
+          Para o diagnóstico completo da rede local, use a
+          <a href="https://github.com/filipebrum1516-max/diagnostico-rede" target="_blank" rel="noopener">versão em Python</a>.
+        </p>
+        <p>Desenvolvido por <a href="https://github.com/filipebrum1516-max" target="_blank" rel="noopener">Filipe Brum</a> · TypeScript</p>
+      </footer>
+    </main>
+  </body>
+</html>
