@@ -123,6 +123,7 @@ input {
 }
 input:focus { border-color: var(--azul-medio); box-shadow: 0 0 0 4px rgba(10, 79, 214, 0.14); }
 .campo-unidade { position: relative; }
+.campo-unidade input { padding-right: 58px; }
 .campo-unidade em { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-style: normal; color: var(--suave); font-size: 14px; }
 
 button { font: inherit; cursor: pointer; }
@@ -251,7 +252,6 @@ button:disabled { opacity: 0.6; cursor: progress; }
 }
 @media (max-width: 560px) {
   .metricas { grid-template-columns: repeat(2, 1fr); }
-  .barra nav a:last-child { display: none; }
   main { padding-top: 28px; }
   .painel { padding: 18px; border-radius: 24px; }
   .achado { grid-template-columns: 1fr; gap: 8px; }
