@@ -184,7 +184,7 @@ function mostrarResultado(coleta: Coleta, diag: Diagnostico, exemplo: boolean): 
 
 // ---------------------------------------------------------------- execução
 async function executar(): Promise<void> {
-  const plano = Number(campoPlano.value) || null;
+  const plano = Number(campoPlano.value.replace(/\D/g, "")) || null;
   const cliente = campoCliente.value.trim() || null;
   botao.disabled = true;
   botaoExemplo.disabled = true;
@@ -290,6 +290,11 @@ $("#baixar-txt").addEventListener("click", () => {
 });
 $("#baixar-json").addEventListener("click", () => {
   if (ultimo) baixar(nomeArquivo("json"), gerarJSON(ultimo.coleta, ultimo.diag, ultimo.cliente, ultimo.quando), "application/json");
+});
+
+// Aceita apenas números no campo do plano.
+campoPlano.addEventListener("input", () => {
+  campoPlano.value = campoPlano.value.replace(/\D/g, "").slice(0, 5);
 });
 
 formulario.addEventListener("submit", (ev) => {
